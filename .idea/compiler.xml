@@ -2,12 +2,13 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="api-gateway" />
         <module name="common" />
+        <module name="api-gateway" />
         <module name="eureka-server" />
       </profile>
       <profile name="Annotation profile for clothing-store" enabled="true">
@@ -23,16 +24,14 @@
         <module name="user-service" />
       </profile>
     </annotationProcessing>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="api-gateway" options="" />
-      <module name="cart-service" options="" />
-      <module name="common" options="" />
-      <module name="eureka-server" options="" />
-      <module name="order-service" options="" />
-      <module name="product-service" options="" />
-      <module name="user-service" options="" />
-    </option>
+    <bytecodeTargetLevel>
+      <module name="api-gateway (1)" target="21" />
+      <module name="clothing-store (1)" target="21" />
+      <module name="common (1)" target="21" />
+      <module name="eureka-server (1)" target="21" />
+      <module name="order-service (1)" target="21" />
+      <module name="product-service (1)" target="21" />
+      <module name="user-service (1)" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package com.clothingstore.product_service.models;
+package com.clothingstore.common.products.enums;
 
 public enum Size {
     XXS,

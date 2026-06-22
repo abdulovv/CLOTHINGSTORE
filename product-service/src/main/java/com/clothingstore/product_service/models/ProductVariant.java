@@ -1,6 +1,6 @@
 package com.clothingstore.product_service.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.clothingstore.common.products.enums.Size;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,10 +17,8 @@ public class ProductVariant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @Column(name = "product_id")
+    private Integer productID;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "size")

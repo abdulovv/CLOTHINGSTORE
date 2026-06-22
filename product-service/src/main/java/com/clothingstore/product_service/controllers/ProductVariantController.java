@@ -1,29 +1,34 @@
 package com.clothingstore.product_service.controllers;
 
-
-import com.clothingstore.product_service.models.ProductVariant;
+import com.clothingstore.common.products.DTO.ProductVariantDTO;
 import com.clothingstore.product_service.services.ProductVariantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 
 @RequiredArgsConstructor
 
-@RequestMapping("/api/products")
+@RequestMapping("/api")
 @RestController
 public class ProductVariantController {
     private final ProductVariantService productVariantService;
 
-    @GetMapping("/{productId}/variants")
-    public List<ProductVariant> getAllProductVariants(@PathVariable("productId") Integer productId) {
-        return productVariantService.findByProductId(productId);
+    @GetMapping("/products/{productID}/variants")
+    public List<ProductVariantDTO> getAllProductVariant(@PathVariable("productID") Integer productId) {
+        return productVariantService.findVariantsByProductId(productId);
     }
 
-    @PostMapping("/{productId}/variants")
-    public ProductVariant createProductVariant(@PathVariable("productId") Integer productId,
-                                               @RequestBody ProductVariant productVariant)
+    @PostMapping("/products/variants")
+    public ProductVariantDTO createProductVariant(@RequestBody ProductVariantDTO productVariantDTO)
     {
-        return productVariantService.save(productId, productVariant);
+        return productVariantService.saveProductVariant(productVariantDTO);
+    }
+
+    @PatchMapping("/products/variants/{id}")
+    public ProductVariantDTO updateProductVariantStock(@PathVariable("id") Integer id,
+                                                       @RequestBody ProductVariantDTO productVariantDTO)
+    {
+        return productVariantService.updateProductVariantStock(id, productVariantDTO);
     }
 }

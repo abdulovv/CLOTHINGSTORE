@@ -1,5 +1,6 @@
 package com.clothingstore.product_service.controllers;
 
+import com.clothingstore.common.products.DTO.ProductDTO;
 import com.clothingstore.product_service.models.Product;
 import com.clothingstore.product_service.services.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -15,18 +16,22 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<Product> getAllProducts() {
+    public List<ProductDTO> getAllProducts() {
         return productService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Product getProduct(@PathVariable("id") Integer id) {
+    public ProductDTO getProduct(@PathVariable("id") Integer id) {
         return productService.findById(id);
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return productService.save(product);
+    public ProductDTO createProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 
+    @PutMapping("/{id}")
+    public ProductDTO updateProduct(@RequestBody ProductDTO product, @PathVariable("id") Integer id) {
+        return productService.updatedProduct(id, product);
+    }
 }

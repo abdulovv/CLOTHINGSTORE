@@ -1,5 +1,7 @@
 package com.clothingstore.product_service.models;
 
+import com.clothingstore.common.products.enums.Category;
+import com.clothingstore.common.products.enums.Sex;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,10 +41,4 @@ public class Product {
 
     @Column(name = "image_path")
     private String imagePath;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductVariant> variants = new ArrayList<>();
-
-
-
 }
