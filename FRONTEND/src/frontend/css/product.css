@@ -1,0 +1,261 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+.product-page-container {
+  max-width: 1200px;
+  margin: 50px auto 100px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+}
+
+.product-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.main-image-box {
+  background: #f7f7f8;
+  height: 600px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.thumbs-images {
+  display: flex;
+  gap: 12px;
+}
+
+.thumb-stub {
+  background: #f7f7f8;
+  width: 85px;
+  height: 110px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #999;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.thumb-stub.active {
+  border-color: #000000;
+}
+
+.product-brand-title {
+  font-size: 34px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0 0 5px 0;
+}
+
+.product-name-title {
+  font-size: 18px;
+  color: #76767a;
+  margin: 0 0 20px 0;
+}
+
+.product-price-box {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 30px;
+}
+
+.size-selector-section {
+  margin-bottom: 10px;
+}
+
+.size-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.size-table-link {
+  color: #005bff;
+  text-decoration: none;
+}
+
+.sizes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.size-btn {
+  background: #fff;
+  border: 1px solid #d1d1d6;
+  min-width: 65px;
+  height: 45px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.size-btn:hover:not(.disabled) {
+  border-color: #000;
+}
+
+.size-btn.selected {
+  border-color: #000;
+  background: #000;
+  color: #fff;
+}
+
+.size-btn.disabled {
+  background: #f7f7f8;
+  color: #c7c7cc;
+  border-color: #e5e5ea;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.purchase-actions {
+  display: flex;
+  gap: 15px;
+  margin: 35px 0;
+}
+
+.add-to-cart-btn {
+  flex: 1;
+  background: #000;
+  color: #fff;
+  border: none;
+  height: 55px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-to-cart-btn:hover {
+  background: #222;
+}
+
+.add-to-fav-btn {
+  background: #fff;
+  border: 1px solid #d1d1d6;
+  width: 55px;
+  height: 55px;
+  font-size: 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+}
+
+.add-to-fav-btn:hover {
+  border-color: #e74c3c;
+}
+
+.product-description-accordion h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.product-description-accordion p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #3a3a3c;
+  margin-bottom: 20px;
+}
+
+.product-description-accordion ul {
+  list-style: none;
+  padding: 0;
+}
+
+.product-description-accordion li {
+  font-size: 14px;
+  padding: 6px 0;
+  border-bottom: 1px dashed #e5e5ea;
+  display: flex;
+}
+
+.product-description-accordion li strong {
+  min-width: 120px;
+  color: #76767a;
+  font-weight: 400;
+}
+
+/* Хедер */
+.site-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eaeaea;
+  height: 64px;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.header-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /* Жестко ставит блок по центру экрана */
+  width: 450px; /* Фиксированная ширина поисковой зоны и логотипа */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #000000;
+  transition: opacity 0.4s ease;
+  text-decoration: none;
+}
+
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav-item {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+}
+
+.nav-item:hover svg {
+  opacity: 0.6;
+}

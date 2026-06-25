@@ -1,0 +1,659 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f6f6f6;
+  color: #111;
+}
+
+/* Базовые стили шапки */
+.site-header {
+  position: relative; /* Обязательно для абсолютного позиционирования центра */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eaeaea;
+  font-family: sans-serif;
+  height: 64px; /* Фиксируем высоту шапки для выравнивания */
+}
+
+.header-left,
+.header-right {
+  flex: 1;
+}
+
+.header-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+/* --- НАДЕЖНОЕ ЦЕНТРИРОВАНИЕ --- */
+.header-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /* Жестко ставит блок по центру экрана */
+  width: 450px; /* Фиксированная ширина поисковой зоны и логотипа */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Название магазина */
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #000000;
+  transition: opacity 0.4s ease;
+}
+
+/* --- КНОПКА ЛУПЫ --- */
+.search-toggle {
+  position: relative;
+  z-index: 20;
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- ПОИСКОВЫЙ КОНТЕЙНЕР --- */
+.center-search-container {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%) scaleX(0);
+  transform-origin: right center;
+
+  width: 100%; /* Развернется на всю ширину .header-center (450px) */
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  padding: 8px 40px 8px 16px; /* Отступ справа под приехавшую лупу */
+  opacity: 0;
+  visibility: hidden;
+  z-index: 15;
+
+  /* Задержка, чтобы лупа успела отъехать */
+  transition:
+    transform 0.7s cubic-bezier(0.25, 1, 0.5, 1) 0.2s,
+    opacity 0.5s ease 0.2s,
+    visibility 0.7s 0.2s;
+}
+
+.search-input {
+  border: none;
+  background: none;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+  color: #000000;
+}
+
+/* --- СОСТОЯНИЕ АКТИВНОГО ПОИСКА --- */
+
+/* Расстояние сдвига лупы рассчитывается так: 
+            Ширина поиска (450px) минус половина ширины лупы (~12px), чтобы она встала на правый край центра.
+            Поскольку лупа стоит в правой секции, сдвиг влево на ~315px (зависит от монитора). 
+            Если лупа встает чуть левее/правее чем надо, отрегулируйте значение translateX ниже: */
+.site-header.search-active .search-toggle {
+  transform: translateX(-295px);
+}
+
+/* Скрываем логотип */
+.site-header.search-active .logo-text {
+  opacity: 0;
+}
+
+/* Открываем поисковик */
+.site-header.search-active .center-search-container {
+  transform: translateY(-50%) scaleX(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Общие стили иконок */
+.nav-item {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  color: #000000;
+  font-size: 16px;
+  text-decoration: none;
+}
+.header-icon-btn {
+  color: #000000;
+}
+
+/* --- СТИЛИ ДЛЯ ВАРИАНТА С ИКОНКАМИ --- */
+
+/* Выстраиваем кнопки в один ряд по центру */
+.auth-icons-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Расстояние между круглыми кнопками */
+  margin-top: 10px;
+}
+
+/* Делаем кнопки идеально круглыми иконками */
+.auth-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px; /* Ширина круга */
+  height: 54px; /* Высота круга */
+  border-radius: 50%; /* Превращает квадрат в идеальный круг */
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    transform 0.1s;
+  padding: 0;
+}
+
+/* Эффект наведения */
+.auth-icon-btn:hover {
+  background-color: #f9f9f9;
+  border-color: #cccccc;
+  transform: translateY(-2px); /* Кнопка красиво приподнимается при наведении */
+}
+
+.auth-icon-btn:active {
+  transform: translateY(0) scale(0.95); /* Легкий эффект нажатия */
+}
+
+/* Персонализация кнопки Apple (черный круг с белым яблоком) */
+.auth-icon-btn.apple-btn {
+  background-color: #000000;
+  border: none;
+  color: #ffffff;
+}
+
+.auth-icon-btn.apple-btn:hover {
+  background-color: #1a1a1a;
+}
+
+/* Цвет для иконки телефона, чтобы она подходила по стилю */
+.auth-icon-btn.phone-btn {
+  color: #333333;
+}
+/* Находим в CSS этот класс и меняем/добавляем эти строчки */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  /* ВАЖНО: Изначально полностью скрываем окно */
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+/* Этот класс будет добавляться через JavaScript при клике */
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.main {
+  max-width: 1300px;
+  margin: 35px auto;
+  padding: 0 25px;
+}
+
+.main h1 {
+  margin-bottom: 25px;
+  font-size: 32px;
+}
+/* --- СТИЛИ ДЛЯ СТРАНИЦЫ В СТИЛЕ LAMODA (НЕ ВЛИЯЮТ НА HEADER) --- */
+
+/* Контейнер-ограничитель, чтобы контент не расползался на весь экран */
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+/* --- СТИЛИ ДЛЯ СЛАЙДЕРА С ОДНОЙ СТРЕЛКОЙ И ТОЧКАМИ --- */
+.promo-carousel-modern {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto 50px auto;
+}
+
+/* Окно, внутри которого движется лента с баннерами */
+.carousel-window {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* Длинная лента, содержащая все 3 баннера в одну линию */
+.carousel-slides-wrapper {
+  display: flex;
+  width: 300%; /* Так как баннера 3, ширина 300% */
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Идеально плавный переход */
+}
+
+/* Каждый отдельный баннер внутри ленты */
+.modern-slide {
+  width: 33.333%; /* Ровно треть от общей длины ленты */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
+  box-sizing: border-box;
+}
+
+/* Одиночная правая стрелка */
+.carousel-single-btn {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.carousel-single-btn:hover {
+  background: #ffffff;
+  transform: translateY(-50%) scale(1.08);
+}
+.carousel-single-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Контейнер для маленьких точек */
+.carousel-mini-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+/* Стиль маленьких точек */
+.mini-dot {
+  width: 7px;
+  height: 7px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    transform 0.3s;
+}
+
+/* Активная точка (текущий баннер) становится чуть шире или темнее */
+.mini-dot.active {
+  background: #000000;
+  transform: scale(1.2);
+}
+
+/* Текст внутри баннера */
+.banner-info h1 {
+  font-size: 42px;
+  margin: 0 0 10px 0;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.banner-info p {
+  font-size: 18px;
+  color: #333;
+  margin: 0 0 20px 0;
+}
+.banner-btn {
+  display: inline-block;
+  background: #000000;
+  color: #ffffff;
+  padding: 14px 35px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+}
+/* Каждый слайд занимает 100% ширины контейнера */
+.scroll-slide {
+  flex: 0 0 100%; /* Запрещаем сжиматься, строго 100% ширины */
+  height: 400px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
+  box-sizing: border-box;
+  scroll-snap-align: start; /* Точка, к которой примагничивается скролл */
+}
+
+/* Стили текста и кнопки внутри баннера */
+.banner-info h1 {
+  font-size: 42px;
+  margin: 0 0 10px 0;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.banner-info p {
+  font-size: 18px;
+  color: #333;
+  margin: 0 0 20px 0;
+}
+.banner-btn {
+  display: inline-block;
+  background: #000000;
+  color: #ffffff;
+  padding: 14px 35px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.banner-btn:hover {
+  background: #222222;
+}
+
+/* Текстовый блок внутри баннера */
+.banner-info h1 {
+  font-size: 42px;
+  margin: 0 0 10px 0;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.banner-info p {
+  font-size: 18px;
+  color: #333;
+  margin: 0 0 20px 0;
+}
+.banner-btn {
+  display: inline-block;
+  background: #000000;
+  color: #ffffff;
+  padding: 14px 35px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.banner-btn:hover {
+  background: #222222;
+}
+
+/* Стрелочки Влево / Вправо */
+/* --- АНИМИРОВАННЫЕ СТРЕЛКИ КАРУСЕЛИ --- */
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(1); /* Исходный размер */
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  /* Важно: плавность для всех изменений (цвета, размера, теней и позиции) */
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.3s ease,
+    left 0.3s ease,
+    right 0.3s ease;
+}
+
+/* Настройки позиций по умолчанию (сдвинули чуть ближе к краям, как в прошлом шаге) */
+.btn-left {
+  left: 12px;
+}
+.btn-right {
+  right: 12px;
+}
+
+/* --- ЭФФЕКТЫ ПРИ НАВЕДЕНИИ (HOVER) --- */
+
+/* Общий эффект для обеих стрелок: делаем фон чисто белым, увеличиваем кнопку и усиливаем тень */
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Левая стрелка при наведении: увеличивается и делает микро-шаг влево */
+.btn-left:hover {
+  transform: translateY(-50%) scale(1.1);
+  left: 6px;
+}
+
+/* Правая стрелка при наведении: увеличивается и делает микро-шаг вправо */
+.btn-right:hover {
+  transform: translateY(-50%) scale(1.1);
+  right: 6px;
+}
+
+/* Эффект при самом моменте клика (нажатии) — стрелка слегка сжимается обратно */
+.carousel-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 1);
+}
+.btn-left {
+  left: 5px;
+}
+.btn-right {
+  right: 5px;
+}
+
+/* Точки-индикаторы внизу карусели */
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.dot.active {
+  background: #000000;
+}
+
+.banner-btn {
+  display: inline-block;
+  background: #000000;
+  color: #ffffff;
+  padding: 14px 35px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.banner-btn:hover {
+  background: #222222;
+}
+
+/* Стили заголовков для секций */
+.categories-section h2,
+.products-section h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* Сетка популярных категорий */
+.categories-section {
+  margin-bottom: 60px;
+}
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.category-card {
+  background: #f9f9f9;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid #eeeeee;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.category-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================
+   УЛУЧШЕННЫЙ ДИЗАЙН КАТАЛОГА (ЛАМОДА СТИЛЬ)
+   ========================================== */
+
+.products-section {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.products-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  letter-spacing: -0.5px;
+}
+
+/* Сетка каталога */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 30px; /* Увеличили расстояние между рядами */
+}
+
+/* Ссылка-обертка карточки */
+.product-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* Сама карточка товара */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition:
+    transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.3s ease;
+}
+
+/* Контейнер для фото (заглушки) */
+.product-image-stub {
+  background: #f7f7f8;
+  height: 420px; /* Пропорции как на Lamoda */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaaaaa;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+/* Эффект при наведении на карточку */
+.product-card-link:hover .product-card {
+  transform: translateY(-8px); /* Карточка изящно приподнимается */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+}
+
+.product-card-link:hover .product-image-stub {
+  background: #f0f0f2; /* Фото слегка темнеет при наведении */
+}
+
+/* Блок с ценой и названиями */
+.product-details {
+  padding: 15px 5px 5px 5px; /* Минималистичные отступы */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-details .brand {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #000000;
+}
+
+.product-details .name {
+  font-size: 14px;
+  color: #76767a;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Если имя длинное, будет красивое триточие */
+}
+
+.product-details .price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+  margin-top: 4px;
+}

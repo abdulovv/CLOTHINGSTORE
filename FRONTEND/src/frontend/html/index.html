@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Clothing Store</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-left"></div>
+
+      <div class="header-center">
+        <span class="logo-text">ABDULOVV STORE</span>
+
+        <div class="center-search-container" id="searchContainer">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Поиск товаров..."
+            id="searchInput"
+          />
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button
+          class="nav-item header-icon-btn search-toggle"
+          id="searchToggleBtn"
+          aria-label="Открыть поиск"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button
+          class="nav-item"
+          onclick="window.location.href = 'favorites.html'"
+          aria-label="Открыть избранное"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+            ></path>
+          </svg>
+        </button>
+
+        <button
+          class="nav-item"
+          onclick="window.location.href = 'cart.html'"
+          aria-label="Открыть корзину"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path
+              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+            ></path>
+          </svg>
+        </button>
+
+        <a href="login.html" class="nav-item" aria-label="Войти в профиль">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <main class="content-wrapper">
+      <section class="promo-carousel-modern">
+        <div class="carousel-window">
+          <div class="carousel-slides-wrapper">
+            <div class="modern-slide" style="background-color: #f0f0f4">
+              <div class="banner-info">
+                <h1>ЛЕТНЯЯ РАСПРОДАЖА</h1>
+                <p>Скидки до -50% на легкие платья, шорты и футболки</p>
+                <a href="#" class="banner-btn">Смотреть каталог</a>
+              </div>
+            </div>
+
+            <div class="modern-slide" style="background-color: #e3edf7">
+              <div class="banner-info">
+                <h1>НОВИНКИ НЕДЕЛИ</h1>
+                <p>Поступление свежих коллекций от мировых брендов</p>
+                <a href="#" class="banner-btn">Узнать больше</a>
+              </div>
+            </div>
+
+            <div class="modern-slide" style="background-color: #fcf0e5">
+              <div class="banner-info">
+                <h1>СПОРТИВНЫЙ СТИЛЬ</h1>
+                <p>Одежда и обувь для фитнеса и активного отдыха</p>
+                <a href="#" class="banner-btn">Выбрать экипировку</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-single-btn" onclick="nextSlide()">
+          &rarr;
+        </button>
+
+        <div class="carousel-mini-dots">
+          <span class="mini-dot active" onclick="goToSlide(0)"></span>
+          <span class="mini-dot" onclick="goToSlide(1)"></span>
+          <span class="mini-dot" onclick="goToSlide(2)"></span>
+        </div>
+      </section>
+
+      <section class="categories-section">
+        <h2>Популярные категории</h2>
+        <div class="categories-grid">
+          <div class="category-card">Одежда</div>
+          <div class="category-card">Обувь</div>
+          <div class="category-card">Аксессуары</div>
+          <div class="category-card">Бренды</div>
+        </div>
+      </section>
+
+      <section class="products-section">
+        <h2>Тренды этой недели</h2>
+        <div class="products-grid">
+          <a href="product.html?id=1" class="product-card-link">
+            <div class="product-card">
+              <div class="product-image-stub">Фото товара</div>
+              <div class="product-details">
+                <span class="brand">Mango</span>
+                <span class="name">Платье повседневное</span>
+                <span class="price">4 999 ₽</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html?id=2" class="product-card-link">
+            <div class="product-card">
+              <div class="product-image-stub">Фото товара</div>
+              <div class="product-details">
+                <span class="brand">Nike</span>
+                <span class="name">Кроссовки Air Max</span>
+                <span class="price">12 499 ₽</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html?id=3" class="product-card-link">
+            <div class="product-card">
+              <div class="product-image-stub">Фото товара</div>
+              <div class="product-details">
+                <span class="brand">Zarina</span>
+                <span class="name">Куртка демисезонная</span>
+                <span class="price">6 599 ₽</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html?id=4" class="product-card-link">
+            <div class="product-card">
+              <div class="product-image-stub">Фото товара</div>
+              <div class="product-details">
+                <span class="brand">Guess</span>
+                <span class="name">Сумка через плечо</span>
+                <span class="price">14 100 ₽</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html?id=5" class="product-card-link">
+            <div class="product-card">
+              <div class="product-image-stub">Фото товара</div>
+              <div class="product-details">
+                <span class="brand">Topshop</span>
+                <span class="name">Джинсы прямого кроя</span>
+                <span class="price">5 200 ₽</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html?id=6" class="product-card-link">
+            <div class="product-card">
+              <div class="product-image-stub">Фото товара</div>
+              <div class="product-details">
+                <span class="brand">Calvin Klein</span>
+                <span class="name">Футболка хлопковая</span>
+                <span class="price">3 899 ₽</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html?id=7" class="product-card-link">
+            <div class="product-card">
+              <div class="product-image-stub">Фото товара</div>
+              <div class="product-details">
+                <span class="brand">Tommy Hilfiger</span>
+                <span class="name">Свитшот оверсайз</span>
+                <span class="price">11 990 ₽</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html?id=8" class="product-card-link">
+            <div class="product-card">
+              <div class="product-image-stub">Фото товара</div>
+              <div class="product-details">
+                <span class="brand">Befree</span>
+                <span class="name">Юбка плиссированная</span>
+                <span class="price">2 599 ₽</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html?id=9" class="product-card-link">
+            <div class="product-card">
+              <div class="product-image-stub">Фото товара</div>
+              <div class="product-details">
+                <span class="brand">Puma</span>
+                <span class="name">Кеды кожаные</span>
+                <span class="price">8 450 ₽</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

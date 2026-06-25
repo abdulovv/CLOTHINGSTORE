@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">ADMIN PANEL</div>
+
+    <nav class="nav">
+        <a href="index.html">Каталог</a>
+    </nav>
+</header>
+
+<main class="admin-container">
+
+    <section class="admin-section">
+        <h2>Добавить товар</h2>
+
+        <input id="name" type="text" placeholder="Название">
+        <input id="description" type="text" placeholder="Описание">
+        <input id="price" type="number" placeholder="Цена">
+
+        <select id="sex">
+            <option value="MALE">Мужской</option>
+            <option value="FEMALE">Женский</option>
+            <option value="UNISEX">Универсальный</option>
+        </select>
+
+        <select id="category">
+            <option value="TSHIRT">Футболка</option>
+            <option value="SHIRT">Рубашка</option>
+            <option value="CAP">Кепка</option>
+            <option value="GLASSES">Очки</option>
+            <option value="SHORTS">Шорты</option>
+            <option value="SOCKS">Носки</option>
+            <option value="SCARF">Шарф</option>
+            <option value="PANTS">Брюки</option>
+            <option value="HAT">Шляпа</option>
+            <option value="SNEAKERS">Кроссовки</option>
+        </select>
+
+        <button onclick="createProduct()">Создать товар</button>
+    </section>
+
+    <section class="admin-section">
+        <h2>Добавить размер</h2>
+
+        <input id="productId" type="number" placeholder="ID товара">
+
+        <div id="selectedProductInfo" class="selected-product">
+            Товар не выбран
+        </div>
+
+        <select id="size">
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+        </select>
+
+        <input id="stock" type="number" placeholder="Количество">
+
+        <button onclick="createVariant()">Добавить размер</button>
+    </section>
+
+    <section class="admin-section">
+        <h2>Все товары</h2>
+
+        <button onclick="loadProducts()">Обновить</button>
+
+        <div id="productsList"></div>
+    </section>
+
+</main>
+
+<script src="../js/admin.js"></script>
+
+</body>
+</html>
